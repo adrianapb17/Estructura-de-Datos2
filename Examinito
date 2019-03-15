@@ -1,0 +1,48 @@
+Cilindro.h
+#pragma once
+class Cilindro
+{
+private:
+	float radio;
+	float altura;
+public:
+	Cilindro(float _radio, float _altura);
+	~Cilindro(void);
+
+	float area(float radio, float altura);
+};
+cilindro.cpp
+#include "StdAfx.h"
+#include "Cilindro.h"
+
+
+Cilindro::Cilindro(float _radio, float _altura)
+{
+	radio= _radio;
+	altura= _altura;
+}
+
+
+Cilindro::~Cilindro(void)
+{
+}
+
+float Cilindro::area(float radio, float altura)
+{
+	float aux;
+	aux= 2*3.141516*radio*(radio+altura);
+	return aux;
+}
+area cilindro.cpp
+#include "stdafx.h"
+#include "Cilindro.h"
+#include "iostream"
+#include "conio.h"
+
+using namespace std;
+void main()
+{
+		Cilindro c1(10,5);
+		cout<< "El area del cilindro es: "<<c1.area(10,5);
+		getch();
+}
