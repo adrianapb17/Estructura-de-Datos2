@@ -1,0 +1,243 @@
+ManejoVector.h
+
+#pragma once
+#include <string>
+#define MAX 100
+class ManejoVector
+{
+private:
+	float vec[MAX];
+	int n;
+public:
+	ManejoVector(int _n);
+	void CargarVector();
+	void MostrarVector();
+	int EncontrarMayor();
+	int EncontrarMenor();
+	float Promedio();
+	void InvertirVector();
+	int capicua();
+	void promedioCada3();
+	int MayorDiferencia();
+	void Concatenar(int Vector2[],int m);
+	~ManejoVector(void);
+};
+
+
+ManejoVector.cpp
+
+#include "StdAfx.h"
+#include <iostream>
+#include "ManejoVector.h"
+using namespace std;
+
+ManejoVector::ManejoVector(int _n)
+{
+	n=_n;
+}
+
+
+ManejoVector::~ManejoVector(void)
+{
+}
+void ManejoVector::CargarVector()
+{
+for(int a=0;a<n;a++)
+{
+	cout<<"V["<<a<<"]=";
+	cin>>vec[a];
+}
+cout<<endl;
+}
+
+void ManejoVector::MostrarVector()
+{
+	for(int i=0;i<n;i++){
+		cout<<vec[i]<<", ";
+}
+	cout<<endl;
+}
+
+int ManejoVector::EncontrarMayor()
+{
+int aux=0;
+	for(int i=0;i<n;i++)
+	{
+		if(vec[i]>aux)aux=vec[i];
+	}
+return aux;
+}
+
+int ManejoVector::EncontrarMenor()
+{
+int aux=vec[0];
+	for(int i=0;i<n;i++)
+	{
+		if(vec[i]<aux)aux=vec[i];
+	}
+return aux;
+}
+
+float ManejoVector::Promedio()
+{
+int S=0;
+float promedio;
+	for(int i=0;i<n;i++)
+	{
+		S=S+vec[i];
+	}
+promedio=S/n;
+return promedio;
+}
+
+void ManejoVector::InvertirVector()
+{
+int *A;
+A=new int[n];
+	for(int i=0;i<n;i++)
+	{
+		A[i]=vec[n-i-1];
+	}
+for(int a=0;a<n;a++)
+{
+cout<<A[a]<<"  ";
+}
+}
+
+int ManejoVector::capicua()
+{
+int band=0;
+	for(int a=0;a<n;a++)
+	{
+		if(vec[a]!=vec[n-a-1])band=1;
+	}
+return band;
+}
+
+
+void ManejoVector::promedioCada3()
+{
+for (int i=0; i<n-2; i++)
+    { int cont=0;
+      double suma= 0.0;
+      for (int j=i; j<n && cont<3; j++, cont++)
+	     { suma= suma+ vec[j];
+	     }
+      double promedio = suma/cont;
+	  cout<<"P"<<i+1<<" es: "<< promedio<<endl;
+    }
+}
+
+int ManejoVector::MayorDiferencia()
+{
+	float diferencia=0, d;
+	for (int i=0 ; i<n-1 ; i++)
+    {	
+		 d= abs (vec[i]-vec[i+1]);
+		 if (d>diferencia){diferencia=d;}
+    }
+  return diferencia;
+}
+
+void ManejoVector::Concatenar(int Vector2[],int m)
+{
+	int *C,p;
+	C=new int[p];
+	p=m+n;
+	for(int i=0;i<p;)
+	{
+		if(i<n)
+		{
+		C[i]=vec[i];
+		}else
+		{
+//		C[i]=Vector[i-m];
+		}
+	}
+}
+
+Vectores.cpp
+// Practico_De_Vectores_Clases.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include <string>
+#include "ManejoVector.h"
+#define MAX 100
+using namespace std;
+
+void main()
+{
+int n,m,opc,mayor,menor,Promedio,band,diferencia;
+do{
+	cout<<"Ingrese el tamaño del vector:";
+	cin>>n;
+}while((n<=0)||(n>MAX));
+ManejoVector Vector1(n);
+do{
+cout<<"--------Menu---------"<<endl;
+cout<<"1.Cargar Vector"<<endl;
+cout<<"2.Mostrar Vector"<<endl;
+cout<<"3.P1.Encontrar Mayor"<<endl;
+cout<<"4.P2.Encontrar Menor"<<endl;
+cout<<"5.P3.Promedio"<<endl;
+cout<<"6.P4.InvertirVector"<<endl;
+cout<<"7.P5.Capicua"<<endl;
+cout<<"8.P6.Promedio de cada 3 elementos"<<endl;
+cout<<"9.P8.Mayor Diferencia"<<endl;
+cout<<"10.P9.Concatenar"<<endl;
+cout<<"0.Salir"<<endl;
+cin>>opc;
+switch(opc){
+		case 1:
+			Vector1.CargarVector();  
+			break;
+		case 2:
+			Vector1.MostrarVector();
+			break;
+		case 3:
+			mayor=Vector1.EncontrarMayor();
+			cout<<"El numero mayor es: "<<mayor<<endl;
+			break;
+		case 4:
+			menor=Vector1.EncontrarMenor();
+			cout<<"El numero menor es:"<<menor<<endl;
+			break;
+		case 5:
+			Promedio=Vector1.Promedio();
+			cout<<"El promedio de los elementos del vector es: "<<Promedio<<endl;
+			break;
+		case 6:
+			Vector1.InvertirVector();
+			break;
+		case 7:
+			band=Vector1.capicua();
+			if (band==1){cout<<"No es capicua"<<endl;}
+			else{cout<<"Es capicua"<<endl;}
+			break;
+		case 8:
+			Vector1.promedioCada3();
+			break;
+		case 9:
+			diferencia=Vector1.MayorDiferencia();
+			break;
+		case 10:
+	//		do{
+	//			cout<<"Ingrese el tamaño del vector:";
+	//			cin>>n;
+	//			}while((m<=0)||(m>MAX));
+	//		ManejoVector Vector2(m);
+	//		Vector1.Concatenar(Vector2,m);
+			break;
+		case 0: 
+			cout<<"Salir"<<endl;
+			break;
+		default:
+			cout<<"Error: Opcion no valida..."<<endl;
+			break;
+		}
+}while(opc!=0);
+getch();
+}
