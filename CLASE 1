@@ -1,0 +1,50 @@
+// Calculadora_de_IVA.cpp : Defines the entry point for the console application.
+//p=p+1 es un acumulador
+
+#include "stdafx.h" //Librerias
+#include "stdlib.h"
+#include <iostream>
+#include "conio.h" 
+using namespace std;
+
+float LeerPrecio();
+float CalcularIVA(float Precio);  //Propotipos
+void MostrarResultado(float Precio,float iva);
+
+
+void main()
+{
+   float Precio,iva,PrecioFinal;		//tipos de datos
+   Precio=LeerPrecio();
+   iva=CalcularIVA(Precio);
+   MostrarResultado(Precio,iva);
+   getch();
+}
+
+
+
+float LeerPrecio()
+{
+   int x;
+   do{
+	 cout<<"Ingrese el Precio del Producto"<<endl;
+	 cin>>x;
+     }while(x<=0);
+   return x;
+}
+
+float CalcularIVA(int Precio)
+{
+	float iva;
+    iva=((Precio*100)/87)-Precio;
+    return iva;
+}
+
+
+
+void MostrarResultado(float Precio, float iva)
+{
+   float Resultado;
+   Resultado=Precio+iva;
+   cout<<"El precio total del producto es "<<Resultado<<" y el IVA es: "<<iva<<endl;
+}
