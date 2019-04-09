@@ -1,0 +1,145 @@
+// Proyecto.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include <string>
+#include "ManejoString.h"
+using namespace std;
+#define MAX 10
+void main()
+{
+ int opc,cont1,cont2;
+ char caracter[MAX];
+ string texto;
+ cout<<"Ingrese un texto"<<endl;
+ getline(cin,texto);
+ ManejoString texto1(texto);
+ do
+ {
+ cout<<"-----------------Menu de texto----------------"<<endl;
+ cout<<"1.Convertir el texto a mayusculas"<<endl;
+ cout<<"2.Convertir el texto a minusculas"<<endl;
+ cout<<"3.Eliminar el caracter insertado"<<endl;
+ cout<<"4.Contar la cantidad de letras del texto"<<endl;
+ cout<<"5.Contar las minusculas del texto"<<endl;
+ cout<<"0.Salir"<<endl;
+ cin>>opc;
+  switch(opc)
+ {
+ case 1:
+	 cout<<texto1.Mayuscula();
+	break;
+ case 2:
+	 cout<<texto1.Minuscula();
+  break;
+ case 3:
+	 cout<<"Ingrese el caracter a eliminar"<<endl;
+	 cin>>caracter[0];
+	 cout<<texto1.EliminarCaracter(caracter)<<endl;
+  break;
+ case 4:
+	 cont1=texto1.contarcaracteres();
+	 cout<<"La cantidad de letras es "<<cont1<<endl;
+  break;
+ case 5:
+	 cont2=texto1.contarMinuscula();
+	 cout<<"La cantidad de minusculas es "<<cont2<<endl;
+  break;
+  }
+
+ }while(opc!=0);
+
+ getch();
+}
+
+#include "StdAfx.h"
+#include "ManejoString.h"
+#include <string>
+using namespace std;
+
+ManejoString::ManejoString(string _texto)
+{
+	texto=_texto;
+}
+
+
+ManejoString::~ManejoString(void)
+{
+}
+
+string ManejoString::Mayuscula()
+{
+	string aux=texto;
+	for(int a=0;a<aux.length();a++)
+	{
+		aux[a]=toupper(texto[a]);
+	}
+	return aux;
+}
+
+string ManejoString::Minuscula()
+{
+	string aux=texto;
+	for(int a=0;a<aux.length();a++)
+	{
+		aux[a]=tolower(texto[a]);
+	}
+	return aux;
+}
+string ManejoString::EliminarCaracter(char caracter[])
+{
+	string aux=texto;
+	int cont=aux.length();
+	for(int i=0;i<cont;i++)
+	{
+		if(aux[i]==caracter[0])
+		{
+		  for(int a=i;a<cont-1;a++)
+		  {
+			aux[i]=aux[a];
+		  }
+		  cont=cont-1;
+		}
+	}
+return aux;
+}
+
+int ManejoString::contarcaracteres()
+{int aux;
+	aux=texto.length();
+	for(int a=0;a<texto.length();a++)
+	{
+	if(texto[a]==' ')aux--;
+	}
+return aux;
+}
+int ManejoString::contarMinuscula()
+{
+int cont=0;
+	for(int i=0;i<texto.length();i++)
+	{
+		if((texto[i]>='a')&&(texto[i]<='z')){cont ++;}
+	}
+return cont;
+}
+
+
+
+#pragma once
+#include <string>
+using namespace std;
+class ManejoString
+{
+private:
+	string texto;
+public:
+	ManejoString(string texto);
+	~ManejoString(void);
+	string Mayuscula();
+	string Minuscula();
+	string EliminarCaracter(char caracter[]);
+	int contarcaracteres();
+	int contarMinuscula();
+};
